@@ -2,7 +2,7 @@
 
 # Grup mbr TJKT
 
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-live-2ea44f?style=for-the-badge&logo=github)](https://ikylewar.github.io/grup-mbr-tjkt/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-live-2ea44f?style=for-the-badge&logo=github)](https://ikyletwar.github.io/grup-mbr-tjkt/)
 [![Static Site](https://img.shields.io/badge/type-static%20site-ebca32?style=for-the-badge)](https://github.com/Ikyletwar/grup-mbr-tjkt)
 [![No Build Step](https://img.shields.io/badge/build-none-0c0b0d?style=for-the-badge)](https://github.com/Ikyletwar/grup-mbr-tjkt)
 [![Mobile First](https://img.shields.io/badge/layout-mobile--first-f4f1e9?style=for-the-badge)](https://github.com/Ikyletwar/grup-mbr-tjkt)
@@ -13,7 +13,7 @@ Satu halaman untuk arsip chat ujian, soal dadakan, jadwal mabar, daftar anggota,
 
 ![Animasi banner Grup mbr TJKT](docs/assets/readme-hero.gif)
 
-<a href="https://ikylewar.github.io/grup-mbr-tjkt/">🌐 Buka website</a> ·
+<a href="https://ikyletwar.github.io/grup-mbr-tjkt/">🌐 Buka website</a> ·
 <a href="https://discord.gg/JPavy7x6p">💬 Discord</a> ·
 <a href="https://chat.whatsapp.com/IfFIyJJckfm5YqHW2lecuT">📱 WhatsApp</a>
 
@@ -234,7 +234,7 @@ Repository ini aktif di GitHub Pages dengan konfigurasi:
 | Source | Deploy from a branch |
 | Branch | `main` |
 | Folder | `/root` |
-| URL | https://ikylewar.github.io/grup-mbr-tjkt/ |
+| URL | https://ikyletwar.github.io/grup-mbr-tjkt/ |
 
 ### Aktifkan ulang lewat UI
 
