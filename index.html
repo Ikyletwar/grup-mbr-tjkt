@@ -1,0 +1,2356 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f1e9">
+  <meta name="description" content="Grup mbr TJKT: kumpulan chat ujian, soal dadakan, mabar, dan hal-hal yang tidak perlu dijelaskan.">
+  <meta property="og:title" content="Grup mbr TJKT — Random, tapi nyambung">
+  <meta property="og:description" content="Ujian, soal, game, dan obrolan yang arahnya bebas.">
+  <meta property="og:type" content="website">
+  <title>Grup mbr TJKT — Random, tapi nyambung</title>
+  <script>
+    document.documentElement.classList.add('js');
+    (function () {
+      var stored = null;
+      try { stored = localStorage.getItem('mbr-tjkt-theme'); } catch (error) { stored = null; }
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = stored === 'dark' || stored === 'light' ? stored : (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      var themeMeta = document.querySelector('meta[name="theme-color"]');
+      if (themeMeta) themeMeta.setAttribute('content', theme === 'dark' ? '#111110' : '#f4f1e9');
+    })();
+  </script>
+  <style>
+    :root {
+      --paper: #f4f1e9;
+      --paper-2: #ebe6dc;
+      --ink: #0c0b0d;
+      --muted: #625f57;
+      --line: #d5cfc2;
+      --yellow: #ebca32;
+      --yellow-soft: #f7e9a6;
+      --amber: #e4a61a;
+      --white: #fffdf8;
+      --on-accent: #0c0b0d;
+      --on-accent-muted: #4a441f;
+      --header-bg: rgba(244, 241, 233, .92);
+      --band-text: #d8d4ca;
+      --band-panel: #191819;
+      --band-line: #45433f;
+      --code-color: #ebca32;
+      --success: #2f6b3f;
+      --danger: #a7482c;
+      --danger-bg: #f1d5cd;
+      --done-bg: #b8e0b0;
+      --done-ink: #0c0b0d;
+      --hover-accent: #8a6410;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      --ease: cubic-bezier(.22, 1, .36, 1);
+      --max: 1240px;
+    }
+
+    :root[data-theme="dark"] {
+      --paper: #111110;
+      --paper-2: #1b1a18;
+      --ink: #f4f1e9;
+      --muted: #aaa69c;
+      --line: #34322e;
+      --yellow-soft: #3a3214;
+      --white: #1b1a18;
+      --header-bg: rgba(17, 17, 16, .92);
+      --band-text: #3f3c34;
+      --band-panel: #f4f1e9;
+      --band-line: #c7c1b3;
+      --code-color: #6f520a;
+      --success: #9fd4aa;
+      --danger: #f0b7a7;
+      --danger-bg: #4a241c;
+      --done-bg: #2f5d32;
+      --done-ink: #e8f5e6;
+      --hover-accent: #f0d268;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    ::selection { background: var(--yellow); color: var(--on-accent); }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; cursor: pointer; }
+    button:disabled { cursor: default; }
+
+    :focus-visible {
+      outline: 2px solid var(--ink);
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 100;
+      padding: 10px 14px;
+      background: var(--ink);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 700;
+      transform: translateY(-160%);
+      transition: transform .2s var(--ease);
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin-inline: auto;
+    }
+
+    .eyebrow {
+      margin: 0;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .arrow { display: inline-block; transition: transform .25s var(--ease); }
+    a:hover .arrow, button:hover .arrow { transform: translateX(4px); }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid var(--line);
+      background: var(--header-bg);
+      backdrop-filter: blur(14px);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      min-height: 64px;
+      padding-top: 10px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; flex: none; }
+    .brand img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--ink);
+      background: var(--yellow);
+    }
+    .brand-name {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: -.01em;
+      line-height: 1.15;
+    }
+    .brand-name span {
+      display: block;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .site-nav {
+      display: flex;
+      align-items: center;
+      order: 3;
+      gap: 4px;
+      width: 100%;
+      min-width: 0;
+      padding-bottom: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .site-nav::-webkit-scrollbar { display: none; }
+    .site-nav a {
+      flex: none;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 650;
+      color: var(--muted);
+      transition: background .2s var(--ease), color .2s var(--ease);
+    }
+    .site-nav a:hover { background: var(--paper-2); color: var(--ink); }
+    .site-nav a[aria-current="true"] { background: var(--ink); color: var(--white); }
+    .header-cta {
+      flex: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 13px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: var(--yellow);
+      font-size: 12px;
+      font-weight: 800;
+      box-shadow: 3px 3px 0 var(--ink);
+      transition: transform .2s var(--ease), box-shadow .2s var(--ease);
+    }
+    .header-cta:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--ink); }
+    .header-cta:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
+    .header-cta { color: var(--on-accent); }
+    .header-cta .pulse-dot { background: var(--on-accent); }
+
+    .theme-toggle {
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--ink);
+      transition: transform .25s var(--ease), background .2s var(--ease), color .2s var(--ease);
+    }
+    .theme-toggle:hover { transform: rotate(12deg); background: var(--paper-2); }
+    .theme-toggle:active { transform: rotate(0deg) scale(.94); }
+    .theme-toggle svg { width: 18px; height: 18px; }
+    .theme-toggle .icon-moon { display: none; }
+    :root[data-theme="dark"] .theme-toggle .icon-sun { display: none; }
+    :root[data-theme="dark"] .theme-toggle .icon-moon { display: block; }
+
+    /* Hero */
+    .hero { padding: 52px 0 40px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 36px;
+    }
+    .hero h1 {
+      margin: 22px 0 0;
+      font-family: var(--serif);
+      font-size: clamp(3.1rem, 15vw, 5.4rem);
+      font-weight: 700;
+      line-height: .88;
+      letter-spacing: -.055em;
+    }
+    .hero h1 .line { display: block; }
+    .hero h1 .highlight {
+      display: inline-block;
+      position: relative;
+      padding: 0 .1em .06em;
+      background: var(--yellow);
+      color: var(--on-accent);
+      transform: rotate(-1.5deg);
+    }
+    .hero-lead {
+      max-width: 36ch;
+      margin: 30px 0 0;
+      font-size: clamp(1rem, 1.5vw, 1.18rem);
+      line-height: 1.55;
+      color: var(--muted);
+    }
+    .hero-lead strong { color: var(--ink); font-weight: 750; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .hero-alt { margin: 14px 0 0; font-size: 13px; color: var(--muted); }
+    .hero-alt a { font-weight: 800; color: var(--ink); border-bottom: 1px solid var(--ink); text-underline-offset: 4px; }
+    .hero-alt a:hover { color: var(--hover-accent); border-color: var(--hover-accent); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: 1px solid var(--ink);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .01em;
+      transition: transform .2s var(--ease), background .2s var(--ease), color .2s var(--ease);
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+    .btn-primary { background: var(--ink); color: var(--white); }
+    .btn-primary:hover { background: #29272a; }
+    .btn-light { background: var(--yellow); color: var(--on-accent); }
+    .btn-ghost { background: transparent; }
+    .btn-ghost:hover { background: var(--paper-2); }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      margin: 36px 0 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--line);
+    }
+    .hero-meta li {
+      padding: 16px 16px 0 0;
+      margin-right: 16px;
+      border-right: 1px solid var(--line);
+    }
+    .hero-meta li:last-child { border-right: 0; margin-right: 0; }
+    .hero-meta strong {
+      display: block;
+      font-family: var(--serif);
+      font-size: 24px;
+      line-height: 1;
+      letter-spacing: -.04em;
+    }
+    .hero-meta span {
+      display: block;
+      margin-top: 6px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero-art { position: relative; max-width: 460px; }
+    .art-frame {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid var(--ink);
+      background: var(--yellow);
+      box-shadow: 8px 8px 0 var(--ink);
+    }
+    .art-frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 44px 44px;
+      opacity: .34;
+    }
+    .art-frame img {
+      position: relative;
+      z-index: 1;
+      width: 74%;
+      height: 74%;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+      transition: transform .35s var(--ease);
+    }
+    .art-stamp {
+      position: absolute;
+      right: 22px;
+      bottom: 22px;
+      z-index: 2;
+      padding: 9px 12px;
+      border: 1px solid var(--ink);
+      background: var(--white);
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 800;
+      line-height: 1.35;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      transform: rotate(5deg);
+    }
+    .art-caption {
+      margin: 18px 0 0;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: left;
+    }
+
+    /* Ticker */
+    .ticker {
+      overflow: hidden;
+      border-block: 1px solid var(--ink);
+      background: var(--yellow);
+    }
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: ticker 34s linear infinite;
+    }
+    .ticker:hover .ticker-track { animation-play-state: paused; }
+    .ticker-set { display: flex; flex: none; align-items: center; gap: 30px; padding: 13px 30px 13px 0; }
+    .ticker-set span {
+      white-space: nowrap;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .ticker-set i { flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--ink); }
+    .ticker--reverse { border-top: 0; background: transparent; }
+    .ticker--reverse .ticker-track { animation-duration: 42s; animation-direction: reverse; }
+    .ticker--reverse .ticker-set { padding-block: 9px; }
+    .ticker--reverse .ticker-set span {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: .05em;
+      text-transform: none;
+    }
+    .ticker--reverse .ticker-set i { background: var(--amber); }
+    @keyframes ticker { to { transform: translateX(-50%); } }
+
+    /* Sections */
+    .section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+    .section-head {
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .section-head h2 {
+      margin: 12px 0 0;
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 6vw, 5.2rem);
+      font-weight: 700;
+      line-height: .95;
+      letter-spacing: -.045em;
+    }
+    .section-head p:last-child {
+      margin: 0;
+      max-width: 42ch;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* Chat archive */
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .filter {
+      padding: 8px 15px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: transparent;
+      font-size: 12px;
+      font-weight: 750;
+      color: var(--muted);
+      transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+    }
+    .filter:hover { border-color: var(--ink); color: var(--ink); }
+    .filter[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--white); }
+    .chat-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .chat-card {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--white);
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+    }
+    .chat-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--ink);
+      box-shadow: 0 12px 28px rgba(12, 11, 13, .08);
+    }
+    .chat-card.is-featured { background: var(--yellow-soft); border-color: var(--amber); }
+    .chat-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .chat-top .channel {
+      padding: 4px 8px;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      color: var(--ink);
+    }
+    .chat-author { margin: 20px 0 6px; font-size: 13px; font-weight: 800; }
+    .chat-text {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(1.12rem, 1.7vw, 1.38rem);
+      line-height: 1.28;
+      letter-spacing: -.02em;
+    }
+    .chat-reply {
+      margin: auto 0 0;
+      padding-top: 18px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .chat-reply b { color: var(--ink); }
+    .filter-note {
+      margin: 18px 0 0;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .empty-state {
+      grid-column: 1 / -1;
+      padding: 48px 24px;
+      border: 1px dashed var(--line);
+      border-radius: 14px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    /* Quiz */
+    .quiz-wrap {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .quiz-aside h3 {
+      margin: 14px 0 18px;
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.02;
+      letter-spacing: -.04em;
+    }
+    .quiz-aside p { max-width: 34ch; margin: 0 0 28px; color: var(--muted); font-size: 15px; }
+    .score-pill {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 12px 18px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: var(--yellow);
+      color: var(--on-accent);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .score-pill strong { font-family: var(--serif); font-size: 26px; letter-spacing: -.03em; }
+    .quiz {
+      padding: clamp(24px, 4vw, 44px);
+      border: 1px solid var(--ink);
+      border-radius: 18px;
+      background: var(--white);
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+    .quiz-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .quiz-head .eyebrow { color: var(--ink); }
+    .quiz-progress { font-family: var(--mono); font-size: 12px; font-weight: 800; color: var(--muted); }
+    .quiz-question {
+      min-height: 0;
+      margin: 24px 0 20px;
+      font-family: var(--serif);
+      font-size: clamp(1.35rem, 5vw, 2rem);
+      line-height: 1.2;
+      letter-spacing: -.03em;
+    }
+    .quiz-options { display: grid; gap: 10px; }
+    .quiz-option {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      padding: 14px 18px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--paper);
+      text-align: left;
+      font-size: 14px;
+      font-weight: 650;
+      transition: transform .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
+    }
+    .quiz-option:not(:disabled):hover { transform: translateX(5px); border-color: var(--ink); background: var(--yellow-soft); }
+    .quiz-option .key {
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .quiz-option.is-correct { background: var(--yellow); border-color: var(--ink); color: var(--on-accent); }
+    .quiz-option.is-wrong { background: var(--danger-bg); border-color: var(--danger); }
+    .quiz-feedback {
+      min-height: 24px;
+      margin: 20px 0 0;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+    .quiz-feedback[data-state="ok"] { color: var(--success); }
+    .quiz-feedback[data-state="no"] { color: var(--danger); }
+    .quiz-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+
+    /* Mabar */
+    .mabar-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+    .mabar-card {
+      padding: clamp(28px, 4vw, 48px);
+      border: 1px solid var(--ink);
+      border-radius: 18px;
+      background: var(--yellow);
+      color: var(--on-accent);
+    }
+    .mabar-card .eyebrow { color: var(--on-accent-muted); }
+    .mabar-card h3 {
+      margin: 16px 0 12px;
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 12vw, 4.2rem);
+      font-weight: 700;
+      line-height: .9;
+      letter-spacing: -.055em;
+    }
+    .mabar-card > p:not(.eyebrow) { max-width: 38ch; margin: 0 0 28px; color: var(--on-accent-muted); font-size: 15px; }
+    .schedule { margin: 0 0 30px; padding: 0; list-style: none; border-top: 1px solid rgba(12, 11, 13, .35); }
+    .schedule li {
+      display: grid;
+      grid-template-columns: 1fr 60px;
+      gap: 8px 12px;
+      align-items: baseline;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(12, 11, 13, .35);
+      font-size: 13px;
+    }
+    .schedule li span { font-family: var(--mono); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--on-accent-muted); }
+    .schedule li strong { font-family: var(--mono); font-size: 12px; }
+    .schedule li em { grid-column: 1 / -1; font-style: normal; }
+    .join-btn { background: var(--ink); color: var(--white); }
+    .join-btn[aria-pressed="true"] { background: var(--white); color: var(--ink); }
+    .leaderboard {
+      display: flex;
+      flex-direction: column;
+      padding: clamp(28px, 4vw, 44px);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--white);
+    }
+    .leaderboard h3 {
+      margin: 12px 0 28px;
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      letter-spacing: -.035em;
+    }
+    .leaderboard ol { margin: 0 0 28px; padding: 0; list-style: none; }
+    .leaderboard li {
+      display: grid;
+      grid-template-columns: 34px 1fr auto;
+      align-items: center;
+      gap: 14px;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .leaderboard li .rank { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+    .leaderboard li .point { font-family: var(--mono); font-size: 11px; font-weight: 800; }
+    .leaderboard-note { margin: auto 0 0; padding-top: 20px; font-size: 12px; color: var(--muted); }
+
+    /* Anggota grup */
+    .member-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .member-card {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--white);
+      transition: transform .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
+    }
+    .member-card:hover { transform: translateY(-3px); border-color: var(--ink); box-shadow: 5px 5px 0 var(--ink); }
+    .member-card:active { transform: translateY(0); box-shadow: 2px 2px 0 var(--ink); }
+    .member-card.is-admin { background: var(--yellow-soft); border-color: var(--amber); }
+    .member-avatar {
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      background: var(--yellow);
+      color: var(--on-accent);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .04em;
+    }
+    .member-card:nth-child(3n + 2) .member-avatar { background: var(--paper-2); color: var(--ink); }
+    .member-card:nth-child(3n + 3) .member-avatar { background: var(--yellow); color: var(--on-accent); }
+    .member-body { min-width: 0; }
+    .member-card .num {
+      display: block;
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .member-name {
+      margin: 5px 0 0;
+      font-family: var(--serif);
+      font-size: 1.12rem;
+      line-height: 1.12;
+      letter-spacing: -.025em;
+    }
+    .member-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .member-role {
+      display: inline-flex;
+      padding: 4px 8px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .member-card.is-admin .member-role { background: var(--ink); color: var(--white); }
+
+    /* Random wheel */
+    .wheel-wrap {
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: center;
+      gap: 30px;
+    }
+    .wheel-dial {
+      display: grid;
+      place-items: center;
+      aspect-ratio: 1;
+      width: min(100%, 340px);
+      margin-inline: auto;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      background: var(--yellow);
+      color: var(--on-accent);
+      box-shadow: 10px 10px 0 var(--ink);
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 700;
+      letter-spacing: -.05em;
+      text-align: center;
+      line-height: 1;
+      transition: transform .42s var(--ease), background .25s var(--ease);
+    }
+    .wheel-dial.is-spinning { transform: rotate(220deg) scale(.94); background: var(--yellow-soft); }
+    .wheel-copy h3 {
+      margin: 14px 0 16px;
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      line-height: .98;
+      letter-spacing: -.045em;
+    }
+    .wheel-result {
+      min-height: 56px;
+      margin: 0 0 24px;
+      font-family: var(--serif);
+      font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+      line-height: 1.25;
+      letter-spacing: -.02em;
+    }
+    .wheel-copy p.wheel-hint { margin: 18px 0 0; font-size: 12px; color: var(--muted); }
+
+    /* Roda random tambahan */
+    .wheel-extra {
+      margin-top: clamp(36px, 6vw, 64px);
+      padding-top: 32px;
+      border-top: 1px solid var(--line);
+    }
+    .wheel-extra-head { display: grid; gap: 12px; margin-bottom: 24px; }
+    .wheel-extra-head h3 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      line-height: 1;
+      letter-spacing: -.04em;
+    }
+    .wheel-extra-head p { max-width: 58ch; margin: 0; font-size: 14px; color: var(--muted); }
+    .wheel-extra-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .mini-wheel {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--white);
+    }
+    .mini-wheel:nth-child(3n + 2) { background: var(--yellow-soft); border-color: var(--amber); }
+    .mini-wheel:nth-child(3n + 3) { background: var(--paper-2); }
+    .mini-wheel .num { font-family: var(--mono); font-size: 10px; font-weight: 800; letter-spacing: .12em; color: var(--muted); }
+    .mini-wheel h4 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      line-height: 1.1;
+      letter-spacing: -.03em;
+    }
+    .mini-wheel-dial {
+      display: grid;
+      place-items: center;
+      width: 76px;
+      aspect-ratio: 1;
+      padding: 8px;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      background: var(--yellow);
+      color: var(--on-accent);
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-align: center;
+      line-height: 1.05;
+      box-shadow: 5px 5px 0 var(--ink);
+      transition: transform .38s var(--ease), background .2s var(--ease), color .2s var(--ease);
+    }
+    .mini-wheel-dial.is-spinning {
+      transform: rotate(200deg) scale(.9);
+      background: var(--white);
+      color: var(--ink);
+    }
+    .mini-wheel-result {
+      min-height: 38px;
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--muted);
+    }
+    .mini-wheel-btn {
+      min-height: 36px;
+      margin-top: auto;
+      padding: 0 15px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--ink);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      transition: transform .2s var(--ease), background .2s var(--ease), color .2s var(--ease);
+    }
+    .mini-wheel-btn:hover { transform: translateY(-2px); background: var(--ink); color: var(--white); }
+    .mini-wheel-btn:active { transform: translateY(0) scale(.97); }
+    .mini-wheel-btn:disabled { opacity: .55; cursor: wait; transform: none; }
+
+    /* Rules */
+    .rules-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .rule {
+      position: relative;
+      overflow: hidden;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--paper-2);
+    }
+    .rule:nth-child(2) { background: var(--yellow-soft); border-color: var(--amber); }
+    .rule .num { font-family: var(--mono); font-size: 11px; font-weight: 800; letter-spacing: .12em; color: var(--muted); }
+    .rule h3 { margin: 18px 0 10px; font-family: var(--serif); font-size: 1.65rem; line-height: 1.1; letter-spacing: -.03em; }
+    .rule p { margin: 0; font-size: 13px; color: var(--muted); }
+
+    /* Footer */
+    .site-footer { padding: 48px 0 36px; }
+    .footer-top {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 30px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid var(--line);
+    }
+    .footer-top h2 {
+      margin: 10px 0 0;
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 6vw, 4.6rem);
+      line-height: .94;
+      letter-spacing: -.045em;
+    }
+    .footer-links { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding-top: 6px; }
+    .footer-links a { font-size: 13px; font-weight: 700; }
+    .footer-links a:hover { text-decoration: underline; text-underline-offset: 4px; }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-top: 22px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Scroll progress */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 70;
+      width: 100%;
+      height: 3px;
+      background: var(--yellow);
+      border-bottom: 1px solid var(--ink);
+      transform: scaleX(0);
+      transform-origin: left center;
+      pointer-events: none;
+    }
+
+    /* Discord link */
+    .pulse-dot {
+      flex: none;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--ink);
+      animation: pulse 1.9s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.6); opacity: .45; }
+    }
+    .btn-yellow { background: var(--yellow); color: var(--on-accent); }
+    .btn-yellow:hover { background: var(--amber); }
+
+    /* Tentang grup */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+    .about-copy h3 {
+      margin: 14px 0 18px;
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: .98;
+      letter-spacing: -.045em;
+    }
+    .about-copy > p { max-width: 42ch; margin: 0 0 26px; color: var(--muted); }
+    .about-points { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+    .about-point {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 14px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .about-point .num { font-family: var(--mono); font-size: 11px; font-weight: 800; color: var(--muted); padding-top: 4px; }
+    .about-point h4 { margin: 0 0 5px; font-size: 14px; font-weight: 800; }
+    .about-point p { margin: 0; font-size: 13px; color: var(--muted); }
+    .topic-cloud { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+    .topic-chip {
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--white);
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      transition: transform .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease);
+    }
+    .topic-chip:hover { transform: translateY(-3px) rotate(-2deg); border-color: var(--ink); background: var(--yellow-soft); }
+    .counter-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .counter-card {
+      position: relative;
+      overflow: hidden;
+      padding: 26px 20px;
+      border: 1px solid var(--ink);
+      border-radius: 14px;
+      background: var(--yellow-soft);
+    }
+    .counter-card:first-child { background: var(--yellow); color: var(--on-accent); }
+    .counter-card:first-child span { color: var(--on-accent-muted); }
+    .counter-card strong {
+      display: block;
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      line-height: 1;
+      letter-spacing: -.05em;
+    }
+    .counter-card span {
+      display: block;
+      margin-top: 10px;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Discord band */
+    .discord-band {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(52px, 8vw, 96px) 0;
+      border-block: 1px solid var(--ink);
+      background-color: var(--ink);
+      background-image: repeating-linear-gradient(135deg, transparent 0 14px, rgba(255, 255, 255, .035) 14px 15px);
+      color: var(--white);
+    }
+    .discord-band-inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 26px;
+    }
+    .discord-band .eyebrow { color: var(--band-text); }
+    .discord-band h2 {
+      margin: 14px 0 12px;
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 6vw, 5.2rem);
+      line-height: .94;
+      letter-spacing: -.05em;
+    }
+    .discord-band p:not(.eyebrow) { max-width: 52ch; margin: 0; color: var(--band-text); }
+    .invite-list { display: grid; gap: 10px; }
+    .discord-invite {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      padding: 8px;
+      border: 1px solid var(--band-line);
+      border-radius: 14px;
+      background: var(--band-panel);
+    }
+    .discord-invite code {
+      grid-column: 1 / -1;
+      overflow: hidden;
+      padding: 4px 0;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--code-color);
+      text-align: center;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .copy-btn, .discord-invite .btn { width: 100%; }
+    .copy-btn {
+      flex: none;
+      min-height: 38px;
+      padding: 0 15px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--yellow);
+      color: var(--on-accent);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      transition: transform .2s var(--ease), background .2s var(--ease), color .2s var(--ease);
+    }
+    .copy-btn:hover { transform: translateY(-2px); background: var(--white); color: var(--ink); }
+    .copy-btn.is-done { background: var(--done-bg); color: var(--done-ink); }
+
+    /* FAQ */
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+    .faq-aside h3 {
+      margin: 14px 0 16px;
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1;
+      letter-spacing: -.04em;
+    }
+    .faq-aside p { margin: 0 0 24px; color: var(--muted); }
+    .faq-list { border-top: 1px solid var(--line); }
+    .faq-list details { border-bottom: 1px solid var(--line); }
+    .faq-list summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 22px 0;
+      list-style: none;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 750;
+      transition: color .2s var(--ease);
+    }
+    .faq-list summary::-webkit-details-marker { display: none; }
+    .faq-list summary:hover { color: var(--hover-accent); }
+    .faq-list summary .plus {
+      flex: none;
+      font-family: var(--mono);
+      font-size: 18px;
+      line-height: 1;
+      transition: transform .3s var(--ease);
+    }
+    .faq-list details[open] summary .plus { transform: rotate(45deg); }
+    .faq-answer {
+      max-width: 62ch;
+      margin: 0;
+      padding: 0 0 24px;
+      color: var(--muted);
+      font-size: 14px;
+      animation: faqIn .35s var(--ease) both;
+    }
+    .faq-answer a { font-weight: 800; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+    @keyframes faqIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Tombol Discord mengambang */
+    .float-discord {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 45;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: var(--yellow);
+      color: var(--on-accent);
+      box-shadow: 4px 4px 0 var(--ink);
+      font-size: 11px;
+      font-weight: 850;
+      opacity: 0;
+      transform: translateY(18px) scale(.96);
+      pointer-events: none;
+      transition: opacity .3s var(--ease), transform .3s var(--ease), box-shadow .2s var(--ease);
+    }
+    .float-discord.is-visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+    .float-discord:hover { box-shadow: 6px 6px 0 var(--ink); transform: translateY(-2px); }
+    .float-wa { bottom: 80px; background: var(--white); color: var(--ink); }
+    .float-wa .pulse-dot { background: var(--amber); }
+
+    /* Efek kilau ringan pada kartu */
+    .card-shine::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, .42) 50%, transparent 62%);
+      transform: translateX(-120%);
+      transition: transform .65s var(--ease);
+      pointer-events: none;
+    }
+    .card-shine:hover::after { transform: translateX(120%); }
+
+    .art-orbit {
+      display: none;
+      position: absolute;
+      inset: -18px;
+      z-index: 0;
+      border: 1px dashed var(--ink);
+      border-radius: 50%;
+      opacity: .28;
+      animation: orbit 4.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes orbit {
+      0%, 100% { opacity: .16; }
+      50% { opacity: .42; }
+    }
+
+    .js .reveal { opacity: 0; transform: translateY(18px); }
+    .js .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity .7s var(--ease), transform .7s var(--ease);
+      transition-delay: var(--delay, 0ms);
+    }
+
+    @media (min-width: 421px) {
+      .schedule li { grid-template-columns: 58px 56px 1fr; }
+      .schedule li em { grid-column: auto; }
+      .discord-invite { grid-template-columns: minmax(0, 1fr) auto auto; }
+      .discord-invite code { grid-column: auto; padding: 0 6px; text-align: left; }
+      .copy-btn, .discord-invite .btn { width: auto; }
+    }
+
+    @media (min-width: 721px) {
+      .container { width: min(100% - 48px, var(--max)); }
+      .brand-name { font-size: 13px; }
+      .header-cta { padding: 10px 16px; font-size: 13px; }
+      .hero { padding: clamp(72px, 9vw, 110px) 0 56px; }
+      .hero h1 { font-size: clamp(4rem, 9vw, 7.4rem); line-height: .84; }
+      .hero-art .art-caption { text-align: right; }
+      .hero-meta { margin-top: 0; }
+      .hero-meta li { padding-right: 26px; margin-right: 26px; }
+      .hero-meta strong { font-size: 30px; }
+      .art-frame { box-shadow: 12px 12px 0 var(--ink); }
+      .art-orbit { display: block; }
+      .section { padding: clamp(72px, 10vw, 110px) 0; }
+      .section-head {
+        grid-template-columns: minmax(0, 1fr) minmax(260px, .65fr);
+        align-items: end;
+        gap: 32px;
+        margin-bottom: 44px;
+      }
+      .chat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .chat-card { min-height: 210px; }
+      .quiz-question { min-height: 92px; font-size: clamp(1.5rem, 3vw, 2.3rem); line-height: 1.15; }
+      .quiz-wrap { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(30px, 5vw, 60px); }
+      .quiz { box-shadow: 10px 10px 0 var(--ink); }
+      .mabar-grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); }
+      .mabar-card h3 { font-size: clamp(3rem, 7vw, 5rem); line-height: .86; }
+      .member-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .wheel-wrap { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(34px, 6vw, 70px); }
+      .wheel-extra-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .rules-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .counter-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .footer-top { flex-direction: row; }
+      .float-discord { right: 24px; bottom: 24px; padding: 12px 18px; font-size: 12px; }
+      .float-wa { bottom: 88px; }
+    }
+
+    @media (min-width: 900px) {
+      .header-inner { flex-wrap: nowrap; gap: 24px; min-height: 74px; padding-top: 0; }
+      .site-nav { order: 0; width: auto; padding-bottom: 0; }
+      .site-nav a { padding: 8px 7px; font-size: 12px; }
+    }
+
+    @media (min-width: 981px) {
+      .container { width: min(100% - 64px, var(--max)); }
+      .hero { padding: clamp(60px, 9vw, 130px) 0 56px; }
+      .hero-grid {
+        grid-template-columns: minmax(0, 1.08fr) minmax(300px, .92fr);
+        align-items: end;
+        gap: clamp(40px, 7vw, 100px);
+      }
+      .hero h1 { font-size: clamp(5rem, 8.5vw, 9.5rem); }
+      .hero-art { max-width: none; }
+      .section { padding: clamp(80px, 10vw, 140px) 0; }
+      .section-head { gap: 40px; }
+      .chat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .quiz-wrap { gap: clamp(30px, 5vw, 80px); }
+      .rules-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .mabar-card h3 { font-size: clamp(3rem, 7vw, 6rem); }
+      .member-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .member-card { padding: 20px; }
+      .wheel-wrap { gap: clamp(34px, 6vw, 90px); }
+      .wheel-extra-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .mini-wheel { padding: 24px; }
+      .mini-wheel-dial { width: 84px; }
+      .about-grid { grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); gap: clamp(36px, 6vw, 90px); }
+      .faq-grid { grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: clamp(36px, 6vw, 90px); }
+      .discord-band-inner { grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 40px; }
+    }
+
+    @media (min-width: 1200px) {
+      .member-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .ticker-track, .pulse-dot, .art-orbit { animation: none; }
+      .js .reveal { opacity: 1; transform: none; }
+      .card-shine::after { transition: none; }
+      .faq-answer { animation: none; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Lewati ke konten</a>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#atas" aria-label="Grup mbr TJKT, kembali ke atas">
+        <img src="assets/logo-grup-mbr-tjkt.jpeg" alt="Logo Grup mbr TJKT">
+        <span class="brand-name">Grup mbr TJKT<span>Random, tapi nyambung</span></span>
+      </a>
+      <nav class="site-nav" aria-label="Navigasi utama">
+        <a href="#tentang">Tentang</a>
+        <a href="#arsip">Arsip</a>
+        <a href="#soal">Soal</a>
+        <a href="#mabar">Mabar</a>
+        <a href="#anggota">Anggota</a>
+        <a href="#roda">Roda</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <button class="theme-toggle" type="button" id="themeToggle" aria-pressed="false" aria-label="Aktifkan dark mode" title="Aktifkan dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"></path>
+        </svg>
+      </button>
+      <a class="header-cta discord-link" href="https://discord.gg/JPavy7x6p" target="_blank" rel="noopener noreferrer" aria-label="Gabung Discord Grup mbr TJKT, buka di tab baru">
+        <span class="pulse-dot" aria-hidden="true"></span>Join Discord <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="atas" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <p class="eyebrow">Kumpulan orang TJKT • arah bebas • jadwal fleksibel</p>
+          <h1 id="hero-title">
+            <span class="line">GRUP MBR</span>
+            <span class="line"><span class="highlight">TJKT</span></span>
+          </h1>
+          <p class="hero-lead">Tempat <strong>chat ujian</strong>, <strong>soal dadakan</strong>, <strong>mabar mendadak</strong>, dan topik-topik yang awalnya jelas tapi berujung pada meme. Markas utamanya ada di <strong>Discord</strong>.</p>
+          <div class="hero-actions">
+            <a class="btn btn-yellow" href="https://discord.gg/JPavy7x6p" target="_blank" rel="noopener noreferrer" aria-label="Gabung Discord Grup mbr TJKT, buka di tab baru">Gabung Discord <span class="arrow" aria-hidden="true">↗</span></a>
+            <a class="btn btn-primary" href="#arsip">Lihat arsip chat <span class="arrow" aria-hidden="true">→</span></a>
+            <a class="btn btn-ghost" href="#soal">Coba kuis 4 soal</a>
+          </div>
+          <p class="hero-alt">Lebih nyaman lewat chat? <a href="https://chat.whatsapp.com/IfFIyJJckfm5YqHW2lecuT" target="_blank" rel="noopener noreferrer" aria-label="Gabung WhatsApp Grup mbr TJKT, buka di tab baru">Gabung grup WhatsApp ↗</a></p>
+          <ul class="hero-meta" aria-label="Statistik tidak resmi grup">
+            <li><strong>∞</strong><span>topik dibahas</span></li>
+            <li><strong>0</strong><span>konsistensi arah</span></li>
+            <li><strong>100%</strong><span>mabar tepat waktu*</span></li>
+          </ul>
+        </div>
+        <div class="hero-art reveal" id="heroArt">
+          <div class="art-orbit" aria-hidden="true"></div>
+          <div class="art-frame" id="artFrame">
+            <img src="assets/logo-grup-mbr-tjkt.jpeg" alt="Logo Grup mbr TJKT dalam bingkai kuning" id="heroLogo">
+            <span class="art-stamp" aria-hidden="true">Not an<br>official syllabus</span>
+          </div>
+          <p class="art-caption">Logo grup — dipakai secukupnya, seperti info ujian.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <div class="ticker-set">
+          <span>Ujian dadakan</span><i></i><span>Soal nomor 7</span><i></i><span>Mabar 15 menit lagi</span><i></i><span>Siapa bawa laptop?</span><i></i><span>Jangan lupa absen</span><i></i><span>OTW lab komputer</span><i></i>
+        </div>
+        <div class="ticker-set">
+          <span>Ujian dadakan</span><i></i><span>Soal nomor 7</span><i></i><span>Mabar 15 menit lagi</span><i></i><span>Siapa bawa laptop?</span><i></i><span>Jangan lupa absen</span><i></i><span>OTW lab komputer</span><i></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="ticker ticker--reverse" aria-hidden="true">
+      <div class="ticker-track">
+        <div class="ticker-set">
+          <span>Discord grup mbr TJKT</span><i></i><span>Info lewat chat, bukan surat resmi</span><i></i><span>Soal dibahas bareng</span><i></i><span>Mabar bukan alasan bolos</span><i></i><span>Kalau ragu, tanya di grup</span><i></i>
+        </div>
+        <div class="ticker-set">
+          <span>Discord grup mbr TJKT</span><i></i><span>Info lewat chat, bukan surat resmi</span><i></i><span>Soal dibahas bareng</span><i></i><span>Mabar bukan alasan bolos</span><i></i><span>Kalau ragu, tanya di grup</span><i></i>
+        </div>
+      </div>
+    </div>
+
+    <section class="section" id="tentang" aria-labelledby="tentang-title">
+      <div class="container about-grid">
+        <div class="about-copy reveal">
+          <p class="eyebrow">00 / Tentang grup</p>
+          <h3 id="tentang-title">Grupnya sederhana. Isinya tidak.</h3>
+          <p>Grup mbr TJKT adalah tempat ngumpulnya orang TJKT untuk bertukar info ujian, bahas soal, mabar, dan kadang membahas hal yang sama sekali tidak ada hubungannya dengan pelajaran. Namanya mabar, tapi diskusinya bebas.</p>
+          <ul class="about-points">
+            <li class="about-point"><span class="num">01</span><div><h4>Informasi cepat</h4><p>Jadwal ujian, tugas, dan pengumuman lewat grup. YANG screenshot lebih dulu, dialah yang selamat.</p></div></li>
+            <li class="about-point"><span class="num">02</span><div><h4>Soal dibahas bareng</h4><p>Tanya soal, coba jawab, lalu validasi bareng. Kadang jawabannya benar, kadang cuma meyakinkan.</p></div></li>
+            <li class="about-point"><span class="num">03</span><div><h4>Mabar setelah selesai</h4><p>Game tim, turnamen dadakan, atau sekadar nonton orang lain main sambil komentar.</p></div></li>
+          </ul>
+          <div class="topic-cloud" aria-label="Topik yang sering muncul">
+            <span class="topic-chip">#ujian</span><span class="topic-chip">#soal</span><span class="topic-chip">#mabar</span><span class="topic-chip">#wifi</span><span class="topic-chip">#lab</span><span class="topic-chip">#meme</span><span class="topic-chip">#random</span>
+          </div>
+        </div>
+        <div class="counter-grid reveal" id="counterGrid">
+          <div class="counter-card card-shine"><strong data-count="4">4</strong><span>Kategori utama</span></div>
+          <div class="counter-card card-shine"><strong data-count="6">6</strong><span>Arsip chat</span></div>
+          <div class="counter-card card-shine"><strong data-count="2">2</strong><span>Kanal komunikasi</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="discord-band" id="discord" aria-labelledby="discord-title">
+      <div class="container discord-band-inner reveal">
+        <div>
+          <p class="eyebrow">Markas grup — dua kanal</p>
+          <h2 id="discord-title">Info penting? Check grup.</h2>
+          <p>Arsip, kuis, dan jadwal ada di website ini. Obrolan yang tidak bisa diprediksi ada di Discord dan WhatsApp grup mbr TJKT. Pilih mana yang paling sering kamu buka.</p>
+        </div>
+        <div class="invite-list">
+          <div class="discord-invite">
+            <code title="https://discord.gg/JPavy7x6p">https://discord.gg/JPavy7x6p</code>
+            <button class="copy-btn" type="button" data-copy="https://discord.gg/JPavy7x6p" data-channel="Discord" aria-label="Salin link undangan Discord">Salin link</button>
+            <a class="btn btn-yellow" href="https://discord.gg/JPavy7x6p" target="_blank" rel="noopener noreferrer" aria-label="Buka Discord Grup mbr TJKT di tab baru">Buka <span class="arrow" aria-hidden="true">↗</span></a>
+          </div>
+          <div class="discord-invite">
+            <code title="https://chat.whatsapp.com/IfFIyJJckfm5YqHW2lecuT">https://chat.whatsapp.com/IfFIyJJckfm5YqHW2lecuT</code>
+            <button class="copy-btn" type="button" data-copy="https://chat.whatsapp.com/IfFIyJJckfm5YqHW2lecuT" data-channel="WhatsApp" aria-label="Salin link undangan WhatsApp">Salin link</button>
+            <a class="btn btn-yellow" href="https://chat.whatsapp.com/IfFIyJJckfm5YqHW2lecuT" target="_blank" rel="noopener noreferrer" aria-label="Buka WhatsApp Grup mbr TJKT di tab baru">Buka <span class="arrow" aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="arsip" aria-labelledby="arsip-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">02 / Arsip percakapan</p>
+            <h2 id="arsip-title">Potongan chat yang entah kenapa diingat.</h2>
+          </div>
+          <p>Dari tanya jam ujian sampai debat soal game. Pilih kategori kalau mau agak teratur — meski grup ini tidak.</p>
+        </div>
+
+        <div class="filters reveal" role="group" aria-label="Filter arsip chat">
+          <button class="filter" type="button" data-filter="semua" aria-pressed="true">Semua</button>
+          <button class="filter" type="button" data-filter="ujian" aria-pressed="false">Ujian</button>
+          <button class="filter" type="button" data-filter="soal" aria-pressed="false">Soal</button>
+          <button class="filter" type="button" data-filter="game" aria-pressed="false">Game</button>
+          <button class="filter" type="button" data-filter="random" aria-pressed="false">Random</button>
+        </div>
+
+        <div class="chat-grid reveal" id="chatGrid">
+          <article class="chat-card is-featured" data-tag="ujian">
+            <div class="chat-top"><span class="channel">#ujian</span><time datetime="08:14">08:14</time></div>
+            <p class="chat-author">Orang Yang Panik</p>
+            <p class="chat-text">“Ujiannya jam 10 atau jam 10 lewat? Yang jelas aku sudah bangun jam 6.”</p>
+            <p class="chat-reply"><b>Balas:</b> “Bangun jam 6, tapi buka notes jam 9.59.”</p>
+          </article>
+          <article class="chat-card" data-tag="soal">
+            <div class="chat-top"><span class="channel">#soal</span><time datetime="10:02">10:02</time></div>
+            <p class="chat-author">Penjawab Dadakan</p>
+            <p class="chat-text">“Nomor 7 kok kayak soal jaringan, tapi jawabannya kayak soal logika?”</p>
+            <p class="chat-reply"><b>Balas:</b> “Itu namanya soal TJKT, wahai teman.”</p>
+          </article>
+          <article class="chat-card" data-tag="game">
+            <div class="chat-top"><span class="channel">#mabar</span><time datetime="19:47">19:47</time></div>
+            <p class="chat-author">Yang Nyicil Data</p>
+            <p class="chat-text">“Mabar 15 menit lagi. Yang belum install game, install dulu. Atau tonton saja.”</p>
+            <p class="chat-reply"><b>Balas:</b> “Aku install semangatnya dulu.”</p>
+          </article>
+          <article class="chat-card" data-tag="random">
+            <div class="chat-top"><span class="channel">#acak</span><time datetime="21:31">21:31</time></div>
+            <p class="chat-author">Filsuf Lab Komputer</p>
+            <p class="chat-text">“Kalau WiFi mati, apakah kita benar-benar online atau cuma berharap?”</p>
+            <p class="chat-reply"><b>Balas:</b> “Coba restart router dulu, bro.”</p>
+          </article>
+          <article class="chat-card" data-tag="ujian">
+            <div class="chat-top"><span class="channel">#ujian</span><time datetime="07:55">07:55</time></div>
+            <p class="chat-author">Pembawa Kalkulator</p>
+            <p class="chat-text">“Bawa pulpen lebih dari satu. Pengalaman bukan, tapi kepikiran terus.”</p>
+            <p class="chat-reply"><b>Balas:</b> “Pulpen aku cuma satu, tapi semangatnya tiga.”</p>
+          </article>
+          <article class="chat-card" data-tag="game">
+            <div class="chat-top"><span class="channel">#mabar</span><time datetime="22:18">22:18</time></div>
+            <p class="chat-author">Admin Diam</p>
+            <p class="chat-text">“Rank naik, tidur turun. Ini namanya investasi.”</p>
+            <p class="chat-reply"><b>Balas:</b> “Investasi apa, sumpah aku lupa?”</p>
+          </article>
+        </div>
+        <p class="filter-note" id="filterNote" aria-live="polite">Menampilkan 6 dari 6 arsip chat.</p>
+      </div>
+    </section>
+
+    <section class="section" id="soal" aria-labelledby="soal-title">
+      <div class="container quiz-wrap">
+        <div class="quiz-aside reveal">
+          <p class="eyebrow">03 / Ujian dadakan</p>
+          <h3 id="soal-title">Soalnya random. Nilainya juga.</h3>
+          <p>Empat pertanyaan ringan seputar hal yang sebenernya sering dipakai, tapi sering lupa pas ujian.</p>
+          <div class="score-pill">Skor <strong id="scoreNow">0</strong> / 4</div>
+        </div>
+
+        <div class="quiz reveal" id="quiz">
+          <div class="quiz-head">
+            <p class="eyebrow">Pop quiz</p>
+            <span class="quiz-progress" id="quizProgress">Soal 1 / 4</span>
+          </div>
+          <h4 class="quiz-question" id="quizQuestion">Perintah Linux apa yang dipakai untuk melihat isi direktori?</h4>
+          <div class="quiz-options" id="quizOptions" role="group" aria-label="Pilihan jawaban"></div>
+          <p class="quiz-feedback" id="quizFeedback" aria-live="polite">Pilih satu jawaban. Tidak ada pengurangan nilai karena mikir.</p>
+          <div class="quiz-actions">
+            <button class="btn btn-primary" type="button" id="quizNext" hidden>Soal berikutnya <span class="arrow" aria-hidden="true">→</span></button>
+            <button class="btn btn-ghost" type="button" id="quizRestart" hidden>Ulangi dari awal</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="mabar" aria-labelledby="mabar-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">04 / Jadwal tidak resmi</p>
+            <h2 id="mabar-title">Mabar dulu, baru debat soal ujian.</h2>
+          </div>
+          <p>Jadwal ini dibuat berdasarkan pola yang tidak bisa diprediksi, kecuali ada yang bawa modem.</p>
+        </div>
+
+        <div class="mabar-grid reveal">
+          <div class="mabar-card">
+            <p class="eyebrow">Weekly-ish</p>
+            <h3>MABAR<br>NIGHT</h3>
+            <p>Game apa pun yang ke-install. Kalau tidak ada yang ke-install, ada debat soal game yang paling seru.</p>
+            <ul class="schedule">
+              <li><span>Senin</span><strong>20.00</strong><em>Game tim, minimal tiga orang</em></li>
+              <li><span>Rabu</span><strong>21.30</strong><em>Soal SKL sambil nunggu turn</em></li>
+              <li><span>Jumat</span><strong>19.00</strong><em>Mabar mendadak, siapa pun gabung</em></li>
+              <li><span>Minggu</span><strong>22.00</strong><em>Nonton ulang pertandingan kemarin</em></li>
+            </ul>
+            <button class="btn join-btn" type="button" id="joinBtn" aria-pressed="false">Tandai hadir · <span id="joinCount">10</span> orang</button>
+          </div>
+
+          <div class="leaderboard">
+            <p class="eyebrow">Papan skor versi grup</p>
+            <h3>Paling rajin, versi sendiri.</h3>
+            <ol>
+              <li><span class="rank">01</span><span>Yang Bawa Modem</span><span class="point">999%</span></li>
+              <li><span class="rank">02</span><span>Rajin Chat Jam 2 Pagi</span><span class="point">87%</span></li>
+              <li><span class="rank">03</span><span>Penjawab Soal Sebelum Ditanya</span><span class="point">74%</span></li>
+              <li><span class="rank">04</span><span>Admin Diam tapi Selalu Online</span><span class="point">68%</span></li>
+            </ol>
+            <p class="leaderboard-note">Poin diukur dari konsistensi ngabsen, bukan dari hasil mabar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="anggota" aria-labelledby="anggota-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">05 / Orang di balik chat</p>
+            <h2 id="anggota-title">Sepuluh orang, satu grup, banyak versi cerita.</h2>
+          </div>
+          <p>Dari admin yang sibuk sampai yang diamnya paling tajam. Ini daftar anggota Grup mbr TJKT — lengkap dengan peran resmi dan peran yang muncul di chat.</p>
+        </div>
+
+        <div class="member-grid">
+          <article class="member-card is-admin reveal">
+            <span class="member-avatar" aria-hidden="true">AS</span>
+            <div class="member-body">
+              <span class="num">Anggota 01</span>
+              <h3 class="member-name">Alfan Setiawan</h3>
+              <div class="member-badges">
+                <span class="member-role">Admin Grup</span>
+                <span class="member-role">Admin Femboy</span>
+              </div>
+            </div>
+          </article>
+          <article class="member-card reveal">
+            <span class="member-avatar" aria-hidden="true">DM</span>
+            <div class="member-body">
+              <span class="num">Anggota 02</span>
+              <h3 class="member-name">Daffah Maulana</h3>
+              <div class="member-badges"><span class="member-role">Anggota</span></div>
+            </div>
+          </article>
+          <article class="member-card reveal">
+            <span class="member-avatar" aria-hidden="true">GR</span>
+            <div class="member-body">
+              <span class="num">Anggota 03</span>
+              <h3 class="member-name">Gihon G Runtuthomas</h3>
+              <div class="member-badges"><span class="member-role">Anggota</span></div>
+            </div>
+          </article>
+          <article class="member-card reveal">
+            <span class="member-avatar" aria-hidden="true">JW</span>
+            <div class="member-body">
+              <span class="num">Anggota 04</span>
+              <h3 class="member-name">Johanes Walalayo</h3>
+              <div class="member-badges"><span class="member-role">Anggota</span></div>
+            </div>
+          </article>
+          <article class="member-card reveal">
+            <span class="member-avatar" aria-hidden="true">K</span>
+            <div class="member-body">
+              <span class="num">Anggota 05</span>
+              <h3 class="member-name">Kamarula</h3>
+              <div class="member-badges"><span class="member-role">Anggota</span></div>
+            </div>
+          </article>
+          <article class="member-card reveal">
+            <span class="member-avatar" aria-hidden="true">PD</span>
+            <div class="member-body">
+              <span class="num">Anggota 06</span>
+              <h3 class="member-name">Paul Dessa</h3>
+              <div class="member-badges"><span class="member-role">Anggota</span></div>
+            </div>
+          </article>
+          <article class="member-card reveal">
+            <span class="member-avatar" aria-hidden="true">RR</span>
+            <div class="member-body">
+              <span class="num">Anggota 07</span>
+              <h3 class="member-name">Rizky R. Rap Rap</h3>
+              <div class="member-badges"><span class="member-role">Anggota</span></div>
+            </div>
+          </article>
+          <article class="member-card reveal">
+            <span class="member-avatar" aria-hidden="true">SI</span>
+            <div class="member-body">
+              <span class="num">Anggota 08</span>
+              <h3 class="member-name">Saif Aslam Ipaenin</h3>
+              <div class="member-badges"><span class="member-role">Anggota</span></div>
+            </div>
+          </article>
+          <article class="member-card reveal">
+            <span class="member-avatar" aria-hidden="true">KH</span>
+            <div class="member-body">
+              <span class="num">Anggota 09</span>
+              <h3 class="member-name">Karel Halawane</h3>
+              <div class="member-badges"><span class="member-role">Anggota</span></div>
+            </div>
+          </article>
+          <article class="member-card reveal">
+            <span class="member-avatar" aria-hidden="true">HL</span>
+            <div class="member-body">
+              <span class="num">Anggota 10</span>
+              <h3 class="member-name">Hizkia Letwar</h3>
+              <div class="member-badges"><span class="member-role">Anggota</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="roda" aria-labelledby="roda-title">
+      <div class="container wheel-wrap">
+        <div class="reveal">
+          <div class="wheel-dial" id="wheelDial" aria-hidden="true">?</div>
+        </div>
+        <div class="wheel-copy reveal">
+          <p class="eyebrow">06 / Pengambilan keputusan</p>
+          <h3 id="roda-title">Biar roda yang milih.</h3>
+          <p class="wheel-result" id="wheelResult" aria-live="polite">Tekan tombol, biarkan grup yang memutuskan.</p>
+          <button class="btn btn-light" type="button" id="wheelBtn">Putar roda random <span class="arrow" aria-hidden="true">→</span></button>
+          <p class="wheel-hint">Hasil tidak bisa di-repeat. Kalau tidak setuju, putar lagi.</p>
+        </div>
+      </div>
+
+      <div class="container wheel-extra">
+        <div class="wheel-extra-head reveal">
+          <p class="eyebrow">10 roda baru / satu roda utama</p>
+          <h3>Kalau satu roda kurang random.</h3>
+          <p>Sepuluh roda kecil untuk keputusan yang sebenarnya tidak perlu dipikirkan panjang. Putar satu, atau putar semua sampai grup kehabisan alasan.</p>
+        </div>
+
+        <div class="wheel-extra-grid">
+          <article class="mini-wheel reveal" data-wheel="makan">
+            <span class="num">RODA 01</span>
+            <h4>Mau makan apa?</h4>
+            <div class="mini-wheel-dial" aria-hidden="true">?</div>
+            <p class="mini-wheel-result" aria-live="polite">Tekan Putar untuk mulai.</p>
+            <button class="mini-wheel-btn" type="button" aria-label="Putar roda Mau makan apa">Putar</button>
+          </article>
+          <article class="mini-wheel reveal" data-wheel="game">
+            <span class="num">RODA 02</span>
+            <h4>Game apa yang jalan?</h4>
+            <div class="mini-wheel-dial" aria-hidden="true">?</div>
+            <p class="mini-wheel-result" aria-live="polite">Tekan Putar untuk mulai.</p>
+            <button class="mini-wheel-btn" type="button" aria-label="Putar roda Game apa yang jalan">Putar</button>
+          </article>
+          <article class="mini-wheel reveal" data-wheel="topik">
+            <span class="num">RODA 03</span>
+            <h4>Topik chat berikutnya?</h4>
+            <div class="mini-wheel-dial" aria-hidden="true">?</div>
+            <p class="mini-wheel-result" aria-live="polite">Tekan Putar untuk mulai.</p>
+            <button class="mini-wheel-btn" type="button" aria-label="Putar roda Topik chat berikutnya">Putar</button>
+          </article>
+          <article class="mini-wheel reveal" data-wheel="role">
+            <span class="num">RODA 04</span>
+            <h4>Role kamu hari ini?</h4>
+            <div class="mini-wheel-dial" aria-hidden="true">?</div>
+            <p class="mini-wheel-result" aria-live="polite">Tekan Putar untuk mulai.</p>
+            <button class="mini-wheel-btn" type="button" aria-label="Putar roda Role kamu hari ini">Putar</button>
+          </article>
+          <article class="mini-wheel reveal" data-wheel="tempat">
+            <span class="num">RODA 05</span>
+            <h4>Nongkrong di mana?</h4>
+            <div class="mini-wheel-dial" aria-hidden="true">?</div>
+            <p class="mini-wheel-result" aria-live="polite">Tekan Putar untuk mulai.</p>
+            <button class="mini-wheel-btn" type="button" aria-label="Putar roda Nongkrong di mana">Putar</button>
+          </article>
+          <article class="mini-wheel reveal" data-wheel="telat">
+            <span class="num">RODA 06</span>
+            <h4>Alasan telat versi grup?</h4>
+            <div class="mini-wheel-dial" aria-hidden="true">?</div>
+            <p class="mini-wheel-result" aria-live="polite">Tekan Putar untuk mulai.</p>
+            <button class="mini-wheel-btn" type="button" aria-label="Putar roda Alasan telat versi grup">Putar</button>
+          </article>
+          <article class="mini-wheel reveal" data-wheel="strategi">
+            <span class="num">RODA 07</span>
+            <h4>Strategi ujian dadakan?</h4>
+            <div class="mini-wheel-dial" aria-hidden="true">?</div>
+            <p class="mini-wheel-result" aria-live="polite">Tekan Putar untuk mulai.</p>
+            <button class="mini-wheel-btn" type="button" aria-label="Putar roda Strategi ujian dadakan">Putar</button>
+          </article>
+          <article class="mini-wheel reveal" data-wheel="hadiah">
+            <span class="num">RODA 08</span>
+            <h4>Hadiah kecil hari ini?</h4>
+            <div class="mini-wheel-dial" aria-hidden="true">?</div>
+            <p class="mini-wheel-result" aria-live="polite">Tekan Putar untuk mulai.</p>
+            <button class="mini-wheel-btn" type="button" aria-label="Putar roda Hadiah kecil hari ini">Putar</button>
+          </article>
+          <article class="mini-wheel reveal" data-wheel="judul">
+            <span class="num">RODA 09</span>
+            <h4>Judul chat random?</h4>
+            <div class="mini-wheel-dial" aria-hidden="true">?</div>
+            <p class="mini-wheel-result" aria-live="polite">Tekan Putar untuk mulai.</p>
+            <button class="mini-wheel-btn" type="button" aria-label="Putar roda Judul chat random">Putar</button>
+          </article>
+          <article class="mini-wheel reveal" data-wheel="nasib">
+            <span class="num">RODA 10</span>
+            <h4>Nasib hari ini?</h4>
+            <div class="mini-wheel-dial" aria-hidden="true">?</div>
+            <p class="mini-wheel-result" aria-live="polite">Tekan Putar untuk mulai.</p>
+            <button class="mini-wheel-btn" type="button" aria-label="Putar roda Nasib hari ini">Putar</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="aturan" aria-labelledby="aturan-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">07 / Aturan tidak resmi</p>
+            <h2 id="aturan-title">Tiga hal yang sebenernya dipatuhi.</h2>
+          </div>
+          <p>Tidak ditulis di pinned message, tapi semua orang tahu.</p>
+        </div>
+        <div class="rules-grid reveal">
+          <article class="rule">
+            <span class="num">01</span>
+            <h3>Kalau ada soal, jawab.</h3>
+            <p>Walaupun jawabannya cuma “coba cari di slide”.</p>
+          </article>
+          <article class="rule">
+            <span class="num">02</span>
+            <h3>Kalau ada mabar, gabung.</h3>
+            <p>Walaupun cuma jadi penonton yang komentar.</p>
+          </article>
+          <article class="rule">
+            <span class="num">03</span>
+            <h3>Kalau ada info ujian, screenshot.</h3>
+            <p>Karena chat ini kecepatan lewatnya tinggi.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="container faq-grid">
+        <div class="faq-aside reveal">
+          <p class="eyebrow">08 / Pertanyaan yang sering muncul</p>
+          <h3 id="faq-title">Yang ditanya terus, akhirnya dijawab di sini.</h3>
+          <p>Masih ada yang kurang jelas? Tanya langsung di grup. Jawabannya mungkin cepat, mungkin setelah mabar selesai.</p>
+          <a class="btn btn-yellow" href="https://discord.gg/JPavy7x6p" target="_blank" rel="noopener noreferrer" aria-label="Tanya langsung di Discord Grup mbr TJKT, buka di tab baru">Tanya di Discord <span class="arrow" aria-hidden="true">↗</span></a>
+        </div>
+        <div class="faq-list reveal">
+          <details open>
+            <summary>Apakah grup ini resmi sekolah?<span class="plus" aria-hidden="true">+</span></summary>
+            <p class="faq-answer">Nama TJKT-nya jelas, tapi isi grupnya tidak mengikuti silabus resmi. Ini tempat berbagi info dan ngobrol. Untuk jadwal ujian yang menentukan, tetap cek pengumuman dari guru atau admin kelas.</p>
+          </details>
+          <details>
+            <summary>Boleh bertanya soal di grup?<span class="plus" aria-hidden="true">+</span></summary>
+            <p class="faq-answer">Boleh. Kirim soalnya, sebutkan bagian yang bikin bingung, lalu tunggu beberapa orang menjawab dengan versi masing-masing. Kalau semua jawabannya beda, itu namanya diskusi.</p>
+          </details>
+          <details>
+            <summary>Kenapa namanya mabar, tapi isinya random?<span class="plus" aria-hidden="true">+</span></summary>
+            <p class="faq-answer">Karena grupnya dibuat untuk ngumpul. Topiknya berkembang sendiri: dari ujian, soal, game, sampai WiFi yang mati tepat sebelum pengumpulan tugas.</p>
+          </details>
+          <details>
+            <summary>Di mana markas grupnya?<span class="plus" aria-hidden="true">+</span></summary>
+            <p class="faq-answer">Ada dua: <a href="https://discord.gg/JPavy7x6p" target="_blank" rel="noopener noreferrer" aria-label="Buka Discord Grup mbr TJKT di tab baru">Discord</a> dan <a href="https://chat.whatsapp.com/IfFIyJJckfm5YqHW2lecuT" target="_blank" rel="noopener noreferrer" aria-label="Buka WhatsApp Grup mbr TJKT di tab baru">WhatsApp</a>. Website ini berisi arsip dan ringkasan; obrolan sebenarnya terjadi di kedua kanal tersebut.</p>
+          </details>
+          <details>
+            <summary>Harus join dua-duanya?<span class="plus" aria-hidden="true">+</span></summary>
+            <p class="faq-answer">Tidak wajib. Discord untuk diskusi yang agak panjang dan arsip, WhatsApp untuk info cepat dan mabar mendadak. Kalau bisa dua-duanya, lebih aman kalau ada pengumuman yang kelewat.</p>
+          </details>
+          <details>
+            <summary>Boleh share meme atau konten random?<span class="plus" aria-hidden="true">+</span></summary>
+            <p class="faq-answer">Boleh, selama tidak menimpa info penting. Kalau ada pengumuman ujian, screenshot lebih dulu — meme bisa ditunda.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <p class="eyebrow">Sampai ketemu di chat berikutnya</p>
+          <h2>Grup mbr TJKT.</h2>
+        </div>
+        <div class="footer-links">
+          <a href="https://discord.gg/JPavy7x6p" target="_blank" rel="noopener noreferrer" aria-label="Gabung Discord Grup mbr TJKT, buka di tab baru">Gabung Discord <span class="arrow" aria-hidden="true">↗</span></a>
+          <a href="https://chat.whatsapp.com/IfFIyJJckfm5YqHW2lecuT" target="_blank" rel="noopener noreferrer" aria-label="Gabung WhatsApp Grup mbr TJKT, buka di tab baru">Gabung WhatsApp <span class="arrow" aria-hidden="true">↗</span></a>
+          <a href="#tentang">Tentang grup</a>
+          <a href="#faq">FAQ</a>
+          <a href="#atas">Kembali ke atas <span class="arrow" aria-hidden="true">↑</span></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© Grup mbr TJKT — website internal, bukan syllabus resmi.</span>
+        <span>Dibuat untuk random yang nyambung.</span>
+      </div>
+    </div>
+  </footer>
+
+  <a class="float-discord float-wa float-cta" id="floatWa" href="https://chat.whatsapp.com/IfFIyJJckfm5YqHW2lecuT" target="_blank" rel="noopener noreferrer" aria-label="Gabung WhatsApp Grup mbr TJKT, buka di tab baru">
+    <span class="pulse-dot" aria-hidden="true"></span>Join WhatsApp <span class="arrow" aria-hidden="true">↗</span>
+  </a>
+  <a class="float-discord float-cta" id="floatDiscord" href="https://discord.gg/JPavy7x6p" target="_blank" rel="noopener noreferrer" aria-label="Gabung Discord Grup mbr TJKT, buka di tab baru">
+    <span class="pulse-dot" aria-hidden="true"></span>Join Discord <span class="arrow" aria-hidden="true">↗</span>
+  </a>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* Toggle tema dengan preferensi tersimpan */
+      var themeToggle = document.getElementById('themeToggle');
+      var themeMeta = document.querySelector('meta[name="theme-color"]');
+
+      function currentTheme() {
+        return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      }
+
+      function syncThemeToggle() {
+        if (!themeToggle) return;
+        var isDark = currentTheme() === 'dark';
+        themeToggle.setAttribute('aria-pressed', String(isDark));
+        var label = isDark ? 'Aktifkan light mode' : 'Aktifkan dark mode';
+        themeToggle.setAttribute('aria-label', label);
+        themeToggle.setAttribute('title', label);
+      }
+
+      if (themeToggle) {
+        themeToggle.addEventListener('click', function () {
+          var next = currentTheme() === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          if (themeMeta) themeMeta.setAttribute('content', next === 'dark' ? '#111110' : '#f4f1e9');
+          try { localStorage.setItem('mbr-tjkt-theme', next); } catch (error) { /* abaikan */ }
+          syncThemeToggle();
+        });
+      }
+      syncThemeToggle();
+
+      /* Reveal saat scroll + stagger ringan */
+      var revealItems = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+      revealItems.forEach(function (item, index) {
+        item.style.setProperty('--delay', (index % 4) * 70 + 'ms');
+      });
+      if ('IntersectionObserver' in window) {
+        var revealObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        revealItems.forEach(function (item) { revealObserver.observe(item); });
+      } else {
+        revealItems.forEach(function (item) { item.classList.add('is-visible'); });
+      }
+
+      /* Scroll progress dan tombol komunitas mengambang */
+      var scrollProgress = document.getElementById('scrollProgress');
+      var floatCtas = Array.prototype.slice.call(document.querySelectorAll('.float-cta'));
+      var scrollScheduled = false;
+
+      function updateScrollEffects() {
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        var ratio = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+        if (scrollProgress) scrollProgress.style.transform = 'scaleX(' + ratio + ')';
+        floatCtas.forEach(function (cta) {
+          cta.classList.toggle('is-visible', window.scrollY > window.innerHeight * .7);
+        });
+        scrollScheduled = false;
+      }
+
+      window.addEventListener('scroll', function () {
+        if (!scrollScheduled) {
+          window.requestAnimationFrame(updateScrollEffects);
+          scrollScheduled = true;
+        }
+      }, { passive: true });
+      window.addEventListener('resize', updateScrollEffects);
+      updateScrollEffects();
+
+      /* Counter yang berjalan saat masuk viewport */
+      var counters = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
+
+      function animateCounter(node) {
+        var target = Number(node.getAttribute('data-count')) || 0;
+        var start = null;
+        var duration = 900;
+
+        function step(timestamp) {
+          if (start === null) start = timestamp;
+          var progress = Math.min(1, (timestamp - start) / duration);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          node.textContent = String(Math.round(target * eased));
+          if (progress < 1) window.requestAnimationFrame(step);
+        }
+        window.requestAnimationFrame(step);
+      }
+
+      if ('IntersectionObserver' in window) {
+        var counterObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            animateCounter(entry.target);
+            counterObserver.unobserve(entry.target);
+          });
+        }, { threshold: 0.6 });
+        counters.forEach(function (node) { counterObserver.observe(node); });
+      } else {
+        counters.forEach(function (node) { node.textContent = node.getAttribute('data-count'); });
+      }
+
+      /* Salin link undangan komunitas */
+      var copyButtons = Array.prototype.slice.call(document.querySelectorAll('.copy-btn'));
+
+      copyButtons.forEach(function (copyBtn) {
+        var inviteUrl = copyBtn.getAttribute('data-copy');
+        var channelName = copyBtn.getAttribute('data-channel') || 'komunitas';
+        var defaultLabel = copyBtn.getAttribute('aria-label');
+
+        copyBtn.addEventListener('click', function () {
+          function done() {
+            copyBtn.textContent = 'Tersalin!';
+            copyBtn.classList.add('is-done');
+            copyBtn.setAttribute('aria-label', 'Link undangan ' + channelName + ' tersalin');
+            window.setTimeout(function () {
+              copyBtn.textContent = 'Salin link';
+              copyBtn.classList.remove('is-done');
+              copyBtn.setAttribute('aria-label', defaultLabel);
+            }, 1800);
+          }
+
+          function fallback() {
+            var field = document.createElement('textarea');
+            field.value = inviteUrl;
+            field.setAttribute('readonly', '');
+            field.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+            document.body.appendChild(field);
+            field.select();
+            try { document.execCommand('copy'); } catch (error) { /* abaikan */ }
+            field.remove();
+            done();
+          }
+
+          if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(inviteUrl).then(done).catch(fallback);
+          } else {
+            fallback();
+          }
+        });
+      });
+
+      /* Efek kilau kartu dan parallax logo */
+      Array.prototype.slice.call(document.querySelectorAll('.chat-card, .rule')).forEach(function (card) {
+        card.classList.add('card-shine');
+      });
+
+      var heroArt = document.getElementById('heroArt');
+      var heroLogo = document.getElementById('heroLogo');
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      if (heroArt && heroLogo && !reduceMotion.matches && window.matchMedia('(hover: hover)').matches) {
+        var pointerFrame = null;
+        heroArt.addEventListener('pointermove', function (event) {
+          var rect = heroArt.getBoundingClientRect();
+          var dx = (event.clientX - rect.left) / rect.width - .5;
+          var dy = (event.clientY - rect.top) / rect.height - .5;
+          if (pointerFrame) window.cancelAnimationFrame(pointerFrame);
+          pointerFrame = window.requestAnimationFrame(function () {
+            heroLogo.style.transform = 'translate3d(' + (dx * 14).toFixed(1) + 'px, ' + (dy * 14).toFixed(1) + 'px, 0)';
+            pointerFrame = null;
+          });
+        });
+        heroArt.addEventListener('pointerleave', function () {
+          if (pointerFrame) window.cancelAnimationFrame(pointerFrame);
+          heroLogo.style.transform = '';
+        });
+      }
+
+      /* Filter arsip chat */
+      var filterButtons = Array.prototype.slice.call(document.querySelectorAll('.filter'));
+      var chatCards = Array.prototype.slice.call(document.querySelectorAll('.chat-card'));
+      var filterNote = document.getElementById('filterNote');
+
+      filterButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          var filter = button.getAttribute('data-filter');
+          var visible = 0;
+
+          filterButtons.forEach(function (item) {
+            item.setAttribute('aria-pressed', String(item === button));
+          });
+
+          chatCards.forEach(function (card) {
+            var match = filter === 'semua' || card.getAttribute('data-tag') === filter;
+            card.hidden = !match;
+            if (match) visible += 1;
+          });
+
+          var label = filter === 'semua' ? 'semua kategori' : 'kategori ' + filter;
+          filterNote.textContent = 'Menampilkan ' + visible + ' dari ' + chatCards.length + ' arsip chat — ' + label + '.';
+        });
+      });
+
+      /* Kuis dadakan */
+      var questions = [
+        {
+          q: 'Perintah Linux apa yang dipakai untuk melihat isi direktori?',
+          options: ['ls', 'mkdir', 'ping', 'sudo magic'],
+          answer: 0,
+          ok: 'Betul. ls itu dasar, seperti absen: kelihatan remeh tapi penting.',
+          no: 'Kurang. Jawabannya ls — mkdir bikin folder, ping ngecek jaringan.'
+        },
+        {
+          q: 'Alamat IP private kelas C yang valid adalah?',
+          options: ['8.8.8.8', '192.168.1.10', '1.1.1.1', '300.1.1.1'],
+          answer: 1,
+          ok: 'Betul. 192.168.x.x termasuk private range kelas C.',
+          no: 'Kurang. 192.168.1.10 itu private; 8.8.8.8 dan 1.1.1.1 publik, 300 bukan oktet valid.'
+        },
+        {
+          q: 'Tag HTML mana yang dipakai untuk membuat tautan?',
+          options: ['<link>', '<href>', '<a>', '<url>'],
+          answer: 2,
+          ok: 'Betul. <a href="..."> itu combo yang sering dipakai.',
+          no: 'Kurang. Tag-nya <a>, atributnya href. Mudah tertukar pas ujian.'
+        },
+        {
+          q: 'Kabel jaringan RJ45 umumnya disebut juga dengan?',
+          options: ['HDMI', 'UTP', 'VGA', 'USB-C'],
+          answer: 1,
+          ok: 'Betul. UTP adalah kabel pasangan twisted yang umum dipakai untuk Ethernet.',
+          no: 'Kurang. Jawabannya UTP; HDMI, VGA, dan USB-C bukan kabel RJ45.'
+        }
+      ];
+
+      var quizQuestion = document.getElementById('quizQuestion');
+      var quizOptions = document.getElementById('quizOptions');
+      var quizFeedback = document.getElementById('quizFeedback');
+      var quizProgress = document.getElementById('quizProgress');
+      var quizNext = document.getElementById('quizNext');
+      var quizRestart = document.getElementById('quizRestart');
+      var scoreNow = document.getElementById('scoreNow');
+      var currentIndex = 0;
+      var score = 0;
+      var locked = false;
+
+      function keys() {
+        return ['A', 'B', 'C', 'D'];
+      }
+
+      function renderQuestion() {
+        var item = questions[currentIndex];
+        locked = false;
+        quizQuestion.textContent = item.q;
+        quizProgress.textContent = 'Soal ' + (currentIndex + 1) + ' / ' + questions.length;
+        quizFeedback.textContent = 'Pilih satu jawaban. Tidak ada pengurangan nilai karena mikir.';
+        quizFeedback.removeAttribute('data-state');
+        quizNext.hidden = true;
+        quizRestart.hidden = true;
+        quizOptions.replaceChildren();
+
+        item.options.forEach(function (option, index) {
+          var button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'quiz-option';
+          button.setAttribute('data-index', String(index));
+
+          var key = document.createElement('span');
+          key.className = 'key';
+          key.setAttribute('aria-hidden', 'true');
+          key.textContent = keys()[index];
+
+          var text = document.createElement('span');
+          text.textContent = option;
+
+          button.appendChild(key);
+          button.appendChild(text);
+          quizOptions.appendChild(button);
+        });
+      }
+
+      function answerQuestion(event) {
+        var button = event.target.closest('.quiz-option');
+        if (!button || locked) return;
+
+        locked = true;
+        var selected = Number(button.getAttribute('data-index'));
+        var item = questions[currentIndex];
+        var buttons = Array.prototype.slice.call(quizOptions.querySelectorAll('.quiz-option'));
+        var correct = selected === item.answer;
+
+        buttons.forEach(function (itemButton) { itemButton.disabled = true; });
+        button.classList.add(correct ? 'is-correct' : 'is-wrong');
+        if (!correct) buttons[item.answer].classList.add('is-correct');
+
+        if (correct) score += 1;
+        scoreNow.textContent = String(score);
+        quizFeedback.textContent = correct ? item.ok : item.no;
+        quizFeedback.setAttribute('data-state', correct ? 'ok' : 'no');
+        quizNext.hidden = false;
+        quizNext.focus();
+      }
+
+      function showResult() {
+        quizProgress.textContent = 'Selesai';
+        quizQuestion.textContent = 'Kuis selesai. Skor kamu ' + score + ' dari ' + questions.length + '.';
+        quizOptions.replaceChildren();
+        quizFeedback.textContent = score === questions.length
+          ? 'Sempurna. Ujian besok boleh tidur tenang.'
+          : score >= 2
+            ? 'Lumayan. Masih bisa dijelaskan di grup.'
+            : 'Gapapa. Besok dibahas lagi sambil mabar.';
+        quizFeedback.setAttribute('data-state', score >= 2 ? 'ok' : 'no');
+        quizNext.hidden = true;
+        quizRestart.hidden = false;
+        quizRestart.focus();
+      }
+
+      quizOptions.addEventListener('click', answerQuestion);
+      quizNext.addEventListener('click', function () {
+        if (currentIndex + 1 < questions.length) {
+          currentIndex += 1;
+          renderQuestion();
+        } else {
+          showResult();
+        }
+      });
+      quizRestart.addEventListener('click', function () {
+        currentIndex = 0;
+        score = 0;
+        scoreNow.textContent = '0';
+        renderQuestion();
+        quizOptions.querySelector('.quiz-option').focus();
+      });
+      renderQuestion();
+
+      /* Tandai hadir mabar */
+      var joinBtn = document.getElementById('joinBtn');
+      var joinCount = document.getElementById('joinCount');
+      var baseCount = Number(joinCount.textContent);
+
+      joinBtn.addEventListener('click', function () {
+        var joined = joinBtn.getAttribute('aria-pressed') !== 'true';
+        joinBtn.setAttribute('aria-pressed', String(joined));
+        joinCount.textContent = String(baseCount + (joined ? 1 : 0));
+        joinBtn.firstChild.textContent = joined ? 'Kamu masuk · ' : 'Tandai hadir · ';
+      });
+
+      /* Roda random */
+      var wheelDial = document.getElementById('wheelDial');
+      var wheelResult = document.getElementById('wheelResult');
+      var wheelBtn = document.getElementById('wheelBtn');
+      var wheelChoices = [
+        { label: 'SOAL', text: 'Buka soal dadakan. Jawabannya boleh salah, yang penting ada.' },
+        { label: 'MABAR', text: 'Buka game. Rank naik atau tidur turun, pilih satu.' },
+        { label: 'UJIAN', text: 'Cek jadwal ujian. Lalu screenshot, karena chat ini cepat lewat.' },
+        { label: 'CHAT', text: 'Baca arsip chat. Dijamin ada satu kalimat yang terlalu relatable.' },
+        { label: 'DIAM', text: 'Diam dulu tiga detik. Jarang dilakukan, tapi sering menyelamatkan.' },
+        { label: 'MAKAN', text: 'Cari makan dulu. Soal dan mabar bisa ditunda sebentar.' }
+      ];
+      var lastWheelIndex = -1;
+      var wheelTimer = null;
+
+      wheelBtn.addEventListener('click', function () {
+        var next = Math.floor(Math.random() * wheelChoices.length);
+        if (next === lastWheelIndex) next = (next + 1) % wheelChoices.length;
+        lastWheelIndex = next;
+
+        wheelBtn.disabled = true;
+        wheelDial.classList.add('is-spinning');
+        wheelResult.textContent = 'Memutar...';
+
+        window.clearTimeout(wheelTimer);
+        wheelTimer = window.setTimeout(function () {
+          wheelDial.classList.remove('is-spinning');
+          wheelDial.textContent = wheelChoices[next].label;
+          wheelResult.textContent = wheelChoices[next].text;
+          wheelBtn.disabled = false;
+        }, 420);
+      });
+
+      /* Sepuluh roda random tambahan */
+      var miniWheelData = {
+        makan: [
+          { label: 'NASGOR', text: 'Nasi goreng. Aman, cepat, dan jarang bikin debat panjang.' },
+          { label: 'INDO', text: 'Indomie. Level berani ditentukan oleh yang paling lapar.' },
+          { label: 'KOPI', text: 'Kopi dulu. Soal bisa menunggu, kantuk tidak.' },
+          { label: 'SATE', text: 'Sate. Alasan manggangnya bisa jadi topik tersendiri.' },
+          { label: 'BAKSO', text: 'Bakso. Kuahnya dipercaya bisa menyelamatkan mood.' },
+          { label: 'GEPREK', text: 'Ayam geprek. Pedasnya sesuai kesepakatan grup.' }
+        ],
+        game: [
+          { label: 'ML', text: 'ML dulu. Rank naik atau turun, tetap dibahas.' },
+          { label: 'VALO', text: 'Valorant. Aim boleh acak, comm harus jelas.' },
+          { label: 'FF', text: 'Free Fire. Cepat, padat, dan sering bikin kaget.' },
+          { label: 'PUBG', text: 'PUBG. Proses slow, akhirnya bisa saja dramatis.' },
+          { label: 'CHESS', text: 'Catur. Tenang di luar, perang dingin di dalam.' },
+          { label: 'UNO', text: 'UNO. Kartu kuning adalah bentuk komunikasi.' }
+        ],
+        topik: [
+          { label: 'UJIAN', text: 'Ujian. Topik ini selalu muncul walau tidak dipanggil.' },
+          { label: 'SOAL', text: 'Soal dadakan. Jawaban boleh beda, diskusi tetap jalan.' },
+          { label: 'MEME', text: 'Meme. Screenshot dulu sebelum kehilangan konteks.' },
+          { label: 'WIFI', text: 'WiFi. Mati tepat sebelum pengumpulan tugas.' },
+          { label: 'DOSEN', text: 'Dosen. Ceritanya selalu punya versi terbaru.' },
+          { label: 'MABAR', text: 'Mabar. Alasan utama grup ini dibuat.' }
+        ],
+        role: [
+          { label: 'TANK', text: 'Tank. Tugasnya menerima damage dan kritikan.' },
+          { label: 'DPS', text: 'DPS. Kalau damage kecil, alasan besar.' },
+          { label: 'SUP', text: 'Support. Diam-diam yang paling dibutuhkan.' },
+          { label: 'JUNG', text: 'Jungler. Rotasi ditentukan oleh insting, bukan peta.' },
+          { label: 'PROXY', text: 'Proxy. Berani maju walau belum tentu disetujui.' },
+          { label: 'AFK', text: 'AFK. Hadir di chat, tidak di meja.' }
+        ],
+        tempat: [
+          { label: 'KANTIN', text: 'Kantin. Tempat info penting dan antrean panjang.' },
+          { label: 'PERPUS', text: 'Perpustakaan. Tenang sampai ada yang tawa keras.' },
+          { label: 'LAB', text: 'Lab. Kabel dan error jadi teman diskusi.' },
+          { label: 'KELAS', text: 'Kelas. Hadir fisik, pikiran bisa saja di mabar.' },
+          { label: 'PARKIR', text: 'Parkiran. Tempat negosiasi mabar terakhir.' },
+          { label: 'RUMAH', text: 'Rumah. WiFi sendiri, tanggung jawab sendiri.' }
+        ],
+        telat: [
+          { label: 'BANGUN', text: 'Bangun kesorean. Alasan klasik yang tidak pernah tua.' },
+          { label: 'WIFI', text: 'WiFi mati. Tidak bisa dijelaskan, tapi dipercaya.' },
+          { label: 'BINGUNG', text: 'Bingung. Mencari jawaban, malah kehilangan waktu.' },
+          { label: 'TEMAN', text: 'Nunggu teman. Teman yang dimaksud bisa saja belum siap.' },
+          { label: 'SALAH', text: 'Salah kelas. Arahnya benar, pintunya yang keliru.' },
+          { label: 'TIDUR', text: 'Tidur lagi. Lima menit yang berubah jadi policy.' }
+        ],
+        strategi: [
+          { label: 'SOAL', text: 'Buka soal lebih dulu. Urutannya boleh diatur sendiri.' },
+          { label: 'HAFAL', text: 'Hafalan cepat. Cocok untuk yang percaya pada pagi.' },
+          { label: 'DISKUSI', text: 'Diskusi. Tiga jawaban berbeda, satu kesimpulan bersama.' },
+          { label: 'SHOT', text: 'Screenshot pengumuman. Chat ini kecepatannya tinggi.' },
+          { label: 'DIAM', text: 'Diam dulu. Kadang jawaban muncul setelah napas.' },
+          { label: 'DOA', text: 'Doa singkat. Lalu buka soal dengan tenang.' }
+        ],
+        hadiah: [
+          { label: 'PUJI', text: 'Pujian kecil. Efeknya lebih besar dari perkiraan.' },
+          { label: 'STIKER', text: 'Stiker grup. Hak pakai selama masih lucu.' },
+          { label: 'MEME', text: 'Satu meme. Berlaku sampai screenshots berikutnya.' },
+          { label: 'KOPI', text: 'Kopi. Hadiah yang bisa diklaim kapan saja.' },
+          { label: 'WIFI', text: 'Akses WiFi. Stabil selama tidak ada yang streaming.' },
+          { label: 'BONUS', text: 'Bonus poin mabar. Nilainya ditentukan oleh admin dadakan.' }
+        ],
+        judul: [
+          { label: 'ANU', text: 'Judul: Anu. Isinya jelas, namanya yang tidak.' },
+          { label: 'BANG', text: 'Judul: Bang. Pembuka paling sering dipakai grup.' },
+          { label: 'WOI', text: 'Judul: Woi. Perhatian langsung didapat.' },
+          { label: 'RANDOM', text: 'Judul: Random. Sudah mewakili seluruh isi.' },
+          { label: 'FIX', text: 'Judul: Fix. Keputusan diambil tanpa rapat panjang.' },
+          { label: 'NANTI', text: 'Judul: Nanti. Waktu pelaksanaannya disepakati kemudian.' }
+        ],
+        nasib: [
+          { label: 'LANCAR', text: 'Lancar. Hari ini jangan diubah-ubah.' },
+          { label: 'MELESET', text: 'Meleset. Arahnya benar, detailnya yang libur.' },
+          { label: 'MABAR', text: 'Mabar. Prioritasnya langsung berubah.' },
+          { label: 'UJIAN', text: 'Ujian dadakan. Screenshot pengumuman lebih dulu.' },
+          { label: 'PUTUS', text: 'Koneksi putus. Pesan terkirim, maksudnya tidak.' },
+          { label: 'TENANG', text: 'Tenang. Ini hasil yang paling underrated.' }
+        ]
+      };
+      var miniSpinDelay = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 380;
+
+      Array.prototype.slice.call(document.querySelectorAll('.mini-wheel')).forEach(function (card) {
+        var choices = miniWheelData[card.getAttribute('data-wheel')] || [];
+        if (!choices.length) return;
+
+        var dial = card.querySelector('.mini-wheel-dial');
+        var result = card.querySelector('.mini-wheel-result');
+        var button = card.querySelector('.mini-wheel-btn');
+        var lastIndex = -1;
+        var timer = null;
+
+        button.addEventListener('click', function () {
+          var next = Math.floor(Math.random() * choices.length);
+          if (next === lastIndex) next = (next + 1) % choices.length;
+          lastIndex = next;
+
+          button.disabled = true;
+          dial.classList.add('is-spinning');
+          result.textContent = 'Memutar...';
+
+          window.clearTimeout(timer);
+          timer = window.setTimeout(function () {
+            dial.classList.remove('is-spinning');
+            dial.textContent = choices[next].label;
+            result.textContent = choices[next].text;
+            button.disabled = false;
+          }, miniSpinDelay);
+        });
+      });
+
+      /* Nav aktif mengikuti section */
+      var navLinks = Array.prototype.slice.call(document.querySelectorAll('.site-nav a'));
+      var sections = navLinks
+        .map(function (link) { return document.querySelector(link.getAttribute('href')); })
+        .filter(Boolean);
+
+      if ('IntersectionObserver' in window && sections.length) {
+        var navObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            navLinks.forEach(function (link) {
+              link.setAttribute('aria-current', String(link.getAttribute('href') === '#' + entry.target.id));
+            });
+          });
+        }, { threshold: 0.4 });
+        sections.forEach(function (section) { navObserver.observe(section); });
+      }
+    })();
+  </script>
+</body>
+</html>
