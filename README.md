@@ -35,6 +35,7 @@ Satu halaman untuk arsip chat ujian, soal dadakan, jadwal mabar, daftar anggota,
 - [Responsive](#responsive)
 - [Aksesibilitas](#aksesibilitas)
 - [FAQ Interaktif](#faq-interaktif)
+- [About](#about)
 - [Roadmap](#roadmap)
 - [Changelog](#changelog)
 - [Kontribusi](#kontribusi)
@@ -93,6 +94,7 @@ Animasi tidak dipakai sebagai dekorasi pasif. Scroll progress memberi konteks po
 | Roda | 1 roda utama + 10 roda mini | Putar, hasil berbeda dari putaran sebelumnya |
 | Aturan | 3 aturan tidak resmi | Kartu shine |
 | FAQ | 6 pertanyaan | Expand/collapse halus |
+| About | Kredit pembuat: Hizkia Letwar / “Nihongo?” | Kartu kreatif + tautan GitHub |
 | Tema | Light/dark | Toggle keyboard-friendly, preferensi tersimpan |
 | Navigasi | Anchor ke tiap section | Active state mengikuti scroll |
 | Floating CTA | Akses cepat Discord/WhatsApp | Muncul setelah scroll tertentu |
@@ -467,6 +469,22 @@ Bisa. Edit blok `.member-grid` di `index.html`. Jika jumlah anggota berubah, per
 
 ---
 
+<a id="about"></a>
+
+## About
+
+Website ini dibuat oleh **Hizkia Letwar**, yang lebih dikenal di grup sebagai **“Nihongo?”**.
+
+<div align="center">
+
+<a href="https://github.com/ikyletwar">🐙 github.com/ikyletwar</a>
+
+</div>
+
+Menu `About` di website menampilkan kredit pembuat, alias “Nihongo?”, dan tautan GitHub di atas. Kartu kredit memakai palet kuning grup dengan efek watermark `HL` dan reveal saat section masuk viewport.
+
+---
+
 <a id="roadmap"></a>
 
 ## Roadmap
@@ -490,6 +508,12 @@ Bisa. Edit blok `.member-grid` di `index.html`. Jika jumlah anggota berubah, per
 <a id="changelog"></a>
 
 ## Changelog
+
+### 1.1.0 — 2026-11-26
+
+- Menu `About` ditambahkan ke navigasi dan footer.
+- Section kredit pembuat: Hizkia Letwar / “Nihongo?”.
+- Tautan GitHub `github.com/ikyletwar` ditambahkan dengan state hover/focus yang konsisten.
 
 ### 1.0.0 — 2026-11-26
 

@@ -888,6 +888,94 @@
     .rule h3 { margin: 18px 0 10px; font-family: var(--serif); font-size: 1.65rem; line-height: 1.1; letter-spacing: -.03em; }
     .rule p { margin: 0; font-size: 13px; color: var(--muted); }
 
+    /* About pembuat */
+    .creator-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+    .creator-copy h3 {
+      margin: 14px 0 18px;
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 6vw, 4.2rem);
+      line-height: .96;
+      letter-spacing: -.045em;
+    }
+    .creator-copy > p { max-width: 46ch; margin: 0; color: var(--muted); }
+    .creator-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .creator-meta span {
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .creator-card {
+      position: relative;
+      overflow: hidden;
+      padding: 28px;
+      border: 1px solid var(--ink);
+      border-radius: 16px;
+      background: var(--yellow);
+      color: var(--on-accent);
+      box-shadow: 8px 8px 0 var(--ink);
+    }
+    .creator-card::after {
+      content: "HL";
+      position: absolute;
+      right: 4px;
+      bottom: -44px;
+      font-family: var(--serif);
+      font-size: clamp(7rem, 22vw, 12rem);
+      line-height: 1;
+      letter-spacing: -.08em;
+      opacity: .12;
+      pointer-events: none;
+    }
+    .creator-card .num {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .creator-alias {
+      position: relative;
+      z-index: 1;
+      margin: 18px 0 8px;
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 6vw, 3.4rem);
+      line-height: .92;
+      letter-spacing: -.06em;
+    }
+    .creator-name {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .creator-card p.creator-note {
+      position: relative;
+      z-index: 1;
+      max-width: 34ch;
+      margin: 16px 0 0;
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--on-accent);
+    }
+    .creator-card .btn { position: relative; z-index: 1; margin-top: 24px; }
+
     /* Footer */
     .site-footer { padding: 48px 0 36px; }
     .footer-top {
@@ -1239,6 +1327,7 @@
       .mabar-grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); }
       .mabar-card h3 { font-size: clamp(3rem, 7vw, 5rem); line-height: .86; }
       .member-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .creator-grid { grid-template-columns: minmax(0, 1fr) minmax(260px, .85fr); gap: 34px; }
       .wheel-wrap { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(34px, 6vw, 70px); }
       .wheel-extra-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .rules-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1251,7 +1340,7 @@
     @media (min-width: 900px) {
       .header-inner { flex-wrap: nowrap; gap: 24px; min-height: 74px; padding-top: 0; }
       .site-nav { order: 0; width: auto; padding-bottom: 0; }
-      .site-nav a { padding: 8px 7px; font-size: 12px; }
+      .site-nav a { padding: 8px 5px; font-size: 11px; }
     }
 
     @media (min-width: 981px) {
@@ -1272,6 +1361,7 @@
       .mabar-card h3 { font-size: clamp(3rem, 7vw, 6rem); }
       .member-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .member-card { padding: 20px; }
+      .creator-grid { grid-template-columns: minmax(0, 1fr) minmax(340px, .78fr); gap: clamp(36px, 6vw, 80px); }
       .wheel-wrap { gap: clamp(34px, 6vw, 90px); }
       .wheel-extra-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .mini-wheel { padding: 24px; }
@@ -1313,6 +1403,7 @@
         <a href="#anggota">Anggota</a>
         <a href="#roda">Roda</a>
         <a href="#faq">FAQ</a>
+        <a href="#about">About</a>
       </nav>
       <button class="theme-toggle" type="button" id="themeToggle" aria-pressed="false" aria-label="Aktifkan dark mode" title="Aktifkan dark mode">
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" focusable="false">
@@ -1812,6 +1903,29 @@
         </div>
       </div>
     </section>
+
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container creator-grid">
+        <div class="creator-copy reveal">
+          <p class="eyebrow">09 / About</p>
+          <h3 id="about-title">Dibuat oleh Hizkia Letwar.</h3>
+          <p>Atau yang lebih sering dipanggil “Nihongo?”. Website ini dirakit supaya grup punya tempat tetap untuk hal-hal yang kadang tidak masuk akal, tapi tetap nyambung.</p>
+          <div class="creator-meta">
+            <span>Hizkia Letwar</span>
+            <span>“Nihongo?”</span>
+            <span>github.com/ikyletwar</span>
+          </div>
+        </div>
+
+        <div class="creator-card reveal">
+          <span class="num">Creator card / 01</span>
+          <p class="creator-alias">“Nihongo?”</p>
+          <p class="creator-name">Hizkia Letwar</p>
+          <p class="creator-note">Pembuat, perakit, dan penanggung jawab atas semua tombol yang sengaja dibikin memuaskan untuk ditekan.</p>
+          <a class="btn btn-primary" href="https://github.com/ikyletwar" target="_blank" rel="noopener noreferrer" aria-label="Buka GitHub Hizkia Letwar / Nihongo?, tab baru">Kunjungi GitHub <span class="arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -1826,12 +1940,13 @@
           <a href="https://chat.whatsapp.com/IfFIyJJckfm5YqHW2lecuT" target="_blank" rel="noopener noreferrer" aria-label="Gabung WhatsApp Grup mbr TJKT, buka di tab baru">Gabung WhatsApp <span class="arrow" aria-hidden="true">↗</span></a>
           <a href="#tentang">Tentang grup</a>
           <a href="#faq">FAQ</a>
+          <a href="#about">About pembuat</a>
           <a href="#atas">Kembali ke atas <span class="arrow" aria-hidden="true">↑</span></a>
         </div>
       </div>
       <div class="footer-bottom">
         <span>© Grup mbr TJKT — website internal, bukan syllabus resmi.</span>
-        <span>Dibuat untuk random yang nyambung.</span>
+        <span>Dibuat oleh Hizkia Letwar / “Nihongo?” — random yang nyambung.</span>
       </div>
     </div>
   </footer>
