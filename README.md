@@ -97,6 +97,8 @@ Animasi tidak dipakai sebagai dekorasi pasif. Scroll progress memberi konteks po
 | About | Kredit pembuat: Hizkia Letwar / “Nihongo?” | Kartu kreatif + tautan GitHub |
 | Tema | Light/dark | Toggle keyboard-friendly, preferensi tersimpan |
 | Navigasi | Anchor ke tiap section | Active state mengikuti scroll |
+| Navigasi mobile | Menu toggle + bottom nav | Target sentuh 44px, aman untuk notch |
+| Adaptif | Layout, tipografi, dan spacing fluid | Animasi direduksi saat save-data/perangkat rendah daya |
 | Floating CTA | Akses cepat Discord/WhatsApp | Muncul setelah scroll tertentu |
 
 <img src="docs/assets/readme-wheel.gif" alt="Animasi roda random berputar" width="320">
@@ -467,6 +469,13 @@ Bisa. Edit blok `.member-grid` di `index.html`. Jika jumlah anggota berubah, per
 
 </details>
 
+<details>
+<summary>Kenapa tampilannya berbeda di HP?</summary>
+
+Website memakai prinsip mobile-first: tipografi dan jarak memakai `clamp()`, navigasi utama menjadi menu toggle, dan bottom nav muncul untuk akses jempol. Daftar anggota dirangkum menjadi 4 kartu dengan tombol ekspansi agar tidak terlalu panjang. Safe-area dihormati untuk HP ber-notch, dan animasi berat otomatis direduksi saat `prefers-reduced-motion`, `save-data`, atau `hardwareConcurrency <= 4`.
+
+</details>
+
 ---
 
 <a id="about"></a>
@@ -508,6 +517,15 @@ Menu `About` di website menampilkan kredit pembuat, alias “Nihongo?”, dan ta
 <a id="changelog"></a>
 
 ## Changelog
+
+### 1.2.0 — 2026-11-26
+
+- Header mobile ringkas dengan menu toggle 8 link dan bottom nav 5 akses cepat.
+- Target sentuh minimal 44px, `touch-action: manipulation`, dan safe-area untuk notch.
+- Tipografi, container, dan spacing fluid memakai `clamp()`.
+- Daftar anggota dirangkum di HP dengan tombol ekspansi ke 10 kartu.
+- Offset anchor dihitung otomatis dari tinggi sticky header.
+- Animasi adaptif: mode `lite` untuk `prefers-reduced-motion`, `save-data`, dan perangkat rendah daya; animasi dijeda saat tab tidak aktif.
 
 ### 1.1.0 — 2026-11-26
 
